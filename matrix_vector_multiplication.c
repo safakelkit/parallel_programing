@@ -29,7 +29,7 @@ int main(int argc, char **argv) {
 
         double start = omp_get_wtime();
 
-        #pragma omp parallel for
+        #pragma omp parallel for 
         for (int i = 0; i < n; ++i) {
             double sum = 0.0;
             int row = i * n;
