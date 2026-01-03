@@ -17,7 +17,7 @@ int main() {
     double t = omp_get_wtime();
 
     #pragma omp parallel for collapse(2) reduction(+:sum) schedule(static, 2)
-    for (int i = 0; i < outer; i++) {
+    for (int i = 0; i < outer; i++) { 
         for (int j = 0; j < inner; j++) {
             sum += heavy(i, j);
         }

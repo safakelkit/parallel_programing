@@ -22,16 +22,16 @@ int main(int argc, const char* argv[]) {
         double start = omp_get_wtime();
 
         double sum = 0.0;
-        #pragma omp parallel shared(pi)
+        #pragma omp parallel
         {
-            #pragma omp for simd reduction(+:sum) schedule(simd:guided,10000)
+            #pragma omp for simd schedule(simd:guided,10000) reduction(+:sum)
             for (long i = 0; i < steps; ++i) {
                 double x = (i + 0.5) * step;
                 sum += 4.0 / (1.0 + x * x);
             }
             
             #pragma omp critical
-            pi = sum * step;
+            pi = sum * step; 
         }
 
         double delta = omp_get_wtime() - start;

@@ -29,17 +29,20 @@ int main(int argc, char **argv) {
 
         double start = omp_get_wtime();
 
-        #pragma omp parallel for 
-        for (int i = 0; i < n; ++i) {
-            double sum = 0.0;
-            int row = i * n;
+        #pragma omp parallel
+        {
+            #pragma omp for schedule(static)
+            for (int i = 0; i < n; ++i) {
+                double sum = 0.0;
+                int row = i * n;
 
-            for (int j = 0; j < n; ++j) {
-                sum += A[row + j] * x[j];
+                #pragma omp simd reduction(+:sum)
+                for (int j = 0; j < n; ++j) {
+                    sum += A[row + j] * x[j];
+                }
+                y[i] = sum;
             }
-            y[i] = sum;
         }
-
         double elapsed = omp_get_wtime() - start;
 
         printf("threads = %d, time = %.4f seconds\n",
