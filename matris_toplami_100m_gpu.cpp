@@ -17,11 +17,11 @@ int main() {
     double dot = 0.0;
     double t0 = omp_get_wtime();
 
-    #pragma omp target map(to: a[0:N], b[0:N]) map(tofrom: dot) 
+    #pragma omp target map(to: a[0:N], b[0:N]) map(tofrom: dot)
     {
         #pragma omp teams reduction(+:dot)
         {
-            #pragma omp distribute parallel for
+            #pragma omp distribute parallel for reduction(+:dot)
             for (int i = 0; i < N; i++) {
                 dot += a[i] * b[i];
             }
