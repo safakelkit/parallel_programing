@@ -22,7 +22,7 @@ int main(int argc, const char* argv[]) {
         double start = omp_get_wtime();
 
         double sum = 0.0;
-        #pragma omp parallel
+        #pragma omp parallel shared(step)
         {
             #pragma omp for simd schedule(simd:guided,10000) reduction(+:sum)
             for (long i = 0; i < steps; ++i) {

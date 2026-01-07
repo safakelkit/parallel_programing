@@ -28,10 +28,10 @@ int main(void) {
             printf("Threads: %d\n", omp_get_num_threads());
         }
 
-        #pragma omp for schedule(static)
+        #pragma omp for schedule(static) reduction(+:dot)
         for (int i = 0; i < N; i++) {
             dot += a[i] * b[i];
-            counts[tid]++;
+            counts[tid]++;  
         }
     }
 
