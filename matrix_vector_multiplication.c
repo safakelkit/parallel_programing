@@ -31,7 +31,7 @@ int main(int argc, char **argv) {
 
         #pragma omp parallel
         {
-            #pragma omp for schedule(static)
+            #pragma omp for schedule(static) //bu kısım
             for (int i = 0; i < n; ++i) {
                 double sum = 0.0;
                 int row = i * n;

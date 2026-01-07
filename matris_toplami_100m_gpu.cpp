@@ -19,7 +19,7 @@ int main() {
 
     #pragma omp target map(to: a[0:N], b[0:N]) map(tofrom: dot)
     {
-        #pragma omp teams reduction(+:dot)
+        #pragma omp teams 
         {
             #pragma omp distribute parallel for reduction(+:dot)
             for (int i = 0; i < N; i++) {

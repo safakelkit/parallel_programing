@@ -35,7 +35,7 @@ int main(void) {
             printf("Threads: %d\n", omp_get_num_threads());
         }
 
-        #pragma omp for schedule(static)
+        #pragma omp for simd schedule(static)
         for (int i = 0; i < N; i++) {
             c[i] = a[i] * b[i];
             counts[tid]++;
